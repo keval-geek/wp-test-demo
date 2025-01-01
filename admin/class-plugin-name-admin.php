@@ -30,7 +30,7 @@ class Plugin_Name_Admin {
 	 * @var      string    $plugin_name    The ID of this plugin.
 	 */
 	private $plugin_name;
-
+	
 	/**
 	 * The version of this plugin.
 	 *
@@ -39,7 +39,7 @@ class Plugin_Name_Admin {
 	 * @var      string    $version    The current version of this plugin.
 	 */
 	private $version;
-
+	
 	/**
 	 * Initialize the class and set its properties.
 	 *
@@ -48,10 +48,11 @@ class Plugin_Name_Admin {
 	 * @param      string    $version    The version of this plugin.
 	 */
 	public function __construct( $plugin_name, $version ) {
-
+		
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
-
+		add_action('init', array($this,'custom_post_type'));
+		
 	}
 
 	/**
@@ -73,7 +74,7 @@ class Plugin_Name_Admin {
 		 * class.
 		 */
 
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/plugin-name-admin.css', array(), $this->version, 'all' );
+		
 
 	}
 
@@ -98,6 +99,24 @@ class Plugin_Name_Admin {
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/plugin-name-admin.js', array( 'jquery' ), $this->version, false );
 
+	}
+
+	public function custom_post_tyoe()
+	{
+		function wporg_custom_post_type() {
+			register_post_type('wporg_product',
+				array(
+					'labels'      => array(
+						'name'          => __( 'Products', 'textdomain' ),
+						'singular_name' => __( 'Product', 'textdomain' ),
+					),
+					'public'      => true,
+					'has_archive' => true,
+					'rewrite'     => array( 'slug' => 'products' ), // my custom slug
+				)
+			);
+		}
+		
 	}
 
 }
