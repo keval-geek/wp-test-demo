@@ -120,12 +120,12 @@ class Plugin_Name_Admin {
 				'wporg_product',
 				array(
 					'labels'      => array(
-						'name'          => __('Products', 'textdomain'),
-						'singular_name' => __('Product', 'textdomain'),
+						'name'          => __('Books', 'textdomain'),
+						'singular_name' => __('Book', 'textdomain'),
 					),
 					'public'      => true,
 					'has_archive' => true,
-					'rewrite'     => array('slug' => 'products'), // my custom slug
+					'rewrite'     => array('slug' => 'books'), // my custom slug
 				)
 			);
 		}
