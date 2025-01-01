@@ -97,7 +97,7 @@ class Plugin_Name_Admin {
 	}
 
 	/**
-	 * Registers a custom post type for Books.
+	 * Registers a custom post type for products.
 	 *
 	 * This function defines a custom post type named 'wporg_product' with specific
 	 * labels, visibility, and rewrite rules. It is intended to be used within the
@@ -120,12 +120,12 @@ class Plugin_Name_Admin {
 				'wporg_product',
 				array(
 					'labels'      => array(
-						'name'          => __('Books', 'textdomains'),
-						'singular_name' => __('Book', 'textdomains'),
+						'name'          => __('Products', 'textdomain'),
+						'singular_name' => __('Product', 'textdomain'),
 					),
 					'public'      => true,
 					'has_archive' => true,
-					'rewrite'     => array('slug' => 'Books'), // my custom slug
+					'rewrite'     => array('slug' => 'products'), // my custom slug
 				)
 			);
 		}
