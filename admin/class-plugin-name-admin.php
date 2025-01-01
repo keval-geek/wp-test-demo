@@ -30,7 +30,7 @@ class Plugin_Name_Admin {
 	 * @var      string    $plugin_name    The ID of this plugin.
 	 */
 	private $plugin_name;
-	
+
 	/**
 	 * The version of this plugin.
 	 *
@@ -39,7 +39,7 @@ class Plugin_Name_Admin {
 	 * @var      string    $version    The current version of this plugin.
 	 */
 	private $version;
-	
+
 	/**
 	 * Initialize the class and set its properties.
 	 *
@@ -47,12 +47,11 @@ class Plugin_Name_Admin {
 	 * @param      string    $plugin_name       The name of this plugin.
 	 * @param      string    $version    The version of this plugin.
 	 */
-	public function __construct( $plugin_name, $version ) {
-		
+	public function __construct($plugin_name, $version) {
+
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
-		add_action('init', array($this,'custom_post_type'));
-		
+		add_action('init', array($this, 'custom_post_type'));
 	}
 
 	/**
@@ -73,9 +72,6 @@ class Plugin_Name_Admin {
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
-
-		
-
 	}
 
 	/**
@@ -97,26 +93,41 @@ class Plugin_Name_Admin {
 		 * class.
 		 */
 
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/plugin-name-admin.js', array( 'jquery' ), $this->version, false );
-
+		wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/plugin-name-admin.js', array('jquery'), $this->version, false);
 	}
 
-	public function custom_post_tyoe()
-	{
+	/**
+	 * Registers a custom post type for products.
+	 *
+	 * This function defines a custom post type named 'wporg_product' with specific
+	 * labels, visibility, and rewrite rules. It is intended to be used within the
+	 * WordPress initialization process to add a new post type for managing products.
+	 *
+	 * @since 1.0.0
+	 */
+	public function custom_post_tyoe() {
 		function wporg_custom_post_type() {
-			register_post_type('wporg_product',
+			/**
+			 * Registers the 'wporg_product' custom post type.
+			 *
+			 * This function is called to register a new post type with WordPress, allowing
+			 * for the creation and management of 'Product' posts. The post type is public,
+			 * has an archive, and uses a custom slug for URLs.
+			 *
+			 * @since 1.0.0
+			 */
+			register_post_type(
+				'wporg_product',
 				array(
 					'labels'      => array(
-						'name'          => __( 'Products', 'textdomain' ),
-						'singular_name' => __( 'Product', 'textdomain' ),
+						'name'          => __('Products', 'textdomain'),
+						'singular_name' => __('Product', 'textdomain'),
 					),
 					'public'      => true,
 					'has_archive' => true,
-					'rewrite'     => array( 'slug' => 'products' ), // my custom slug
+					'rewrite'     => array('slug' => 'products'), // my custom slug
 				)
 			);
 		}
-		
 	}
-
 }
